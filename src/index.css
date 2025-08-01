@@ -5,7 +5,10 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+
+  background-color: rgba(18, 24, 41, 0.8);
+  background-image: url(assets/Background.svg);
+  background-size: cover;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
