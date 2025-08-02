@@ -2,4 +2,6 @@
     color: rgba(235, 238, 245, 1);
     font-weight: 600;
     font-size: 64px;
+    margin: 0;
+    line-height: 80px;
 }
