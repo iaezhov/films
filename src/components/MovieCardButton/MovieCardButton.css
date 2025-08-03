@@ -1,0 +1,25 @@
+.button-like {
+    border: none;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(123, 110, 246, 1);
+    cursor: pointer;
+    padding: 8px;
+    width: max-content;
+}
+.button-like svg {
+    width: 24px;
+    height: 24px;
+    color: rgba(123, 110, 246, 1);
+}
+.button-like--marked {
+    color: rgba(55, 216, 167, 1);
+}
+.button-like--marked svg {
+    color: rgba(55, 216, 167, 1);
+}

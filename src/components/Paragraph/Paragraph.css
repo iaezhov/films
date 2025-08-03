@@ -1,0 +1,15 @@
+.paragraph {
+    font-weight: 400;
+    letter-spacing: 0;
+    color: rgba(142, 149, 169, 1);
+    margin: 0;
+    margin-top: 16px;
+}
+.paragraph.default {
+    font-size: 16px;
+    line-height: 24px;
+}
+.paragraph.small {
+    font-size: 14px;
+    line-height: 20px;
+}
