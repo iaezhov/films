@@ -1,25 +1,26 @@
-import './Navigation.css';
+import styles from './Navigation.module.css';
 import IconLogin from '../../components/Icons/IconLogin';
 import IconBookmark from '../../components/Icons/IconBookmark';
+import cn from 'classnames';
 
 function Navigation() {
 	return (
-		<header className='navigation'>
-			<IconBookmark className='logo' />
-			<nav className='navigation-list'>
+		<header className={styles['navigation']}>
+			<IconBookmark className={styles['logo']} />
+			<nav className={styles['navigation-list']}>
 				<ul>
-					<li className='navigation-list-item navigation-list-item__active'>
+					<li className={cn(styles['navigation-list-item'], styles['navigation-list-item__active'])}>
 						<a href="#">
 							<span>Поиск фильмов</span>
 						</a>
 					</li>
-					<li className='navigation-list-item'>
+					<li className={styles['navigation-list-item']}>
 						<a href="#">
 							<span>Мои фильмы</span>
-							<div className='counter'>2</div>
+							<div className={styles['counter']}>2</div>
 						</a>
 					</li>
-					<li className='navigation-list-item'>
+					<li className={styles['navigation-list-item']}>
 						<a href="#">
 							<span>Войти</span>
 							<IconLogin />

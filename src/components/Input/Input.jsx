@@ -1,16 +1,16 @@
 import IconSearch from '../Icons/IconSearch';
-import './Input.css';
+import styles from './Input.module.css';
 
 function Input({ placeholder, value, name, onChange, icon }) {
 	return (
-		<div className="input-wrapper">
+		<div className={styles['input-wrapper']}>
 			{ icon === 'search' && <IconSearch /> }
 			<input
 				name={name || 'value'}
 				type="text"
 				value={value}
 				onChange={onChange}
-				className="styled-input"
+				className={styles['styled-input']}
 				placeholder={placeholder}
 			/>
 		</div>
