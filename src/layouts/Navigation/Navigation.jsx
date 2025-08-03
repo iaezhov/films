@@ -1,10 +1,11 @@
 import './Navigation.css';
-import IconLogin from '../../components/icons/IconLogin';
+import IconLogin from '../../components/Icons/IconLogin';
+import IconBookmark from '../../components/Icons/IconBookmark';
 
 function Navigation() {
 	return (
 		<header className='navigation'>
-			<img className='logo' src="/logo.svg" alt="Лого" />
+			<IconBookmark className='logo' />
 			<nav className='navigation-list'>
 				<ul>
 					<li className='navigation-list-item navigation-list-item__active'>

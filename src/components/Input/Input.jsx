@@ -1,4 +1,4 @@
-import IconSearch from '../icons/IconSearch';
+import IconSearch from '../Icons/IconSearch';
 import './Input.css';
 
 function Input({ placeholder, value, name, onChange, icon }) {

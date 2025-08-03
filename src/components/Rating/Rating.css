@@ -1,0 +1,13 @@
+.rating {
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    color: rgba(255, 173, 73, 1);
+    border-radius: 8px;
+    backdrop-filter: blur(8px)
+}
