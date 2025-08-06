@@ -1,16 +1,52 @@
 import './App.css';
-import Button from './components/Button/Button';
-import Paragraph from './components/Paragraph/Paragraph';
-import Title from './components/Title/Title';
-import Input from './components/Input/Input';
 import Navigation from './layouts/Navigation/Navigation';
 import { useState } from 'react';
 import MovieList from './components/MovieList/MovieList';
+import SearchForm from './components/SearchForm/SearchForm';
+import LoginForm from './components/LoginForm/LoginForm';
+import { useLocalStorage } from './components/hooks/use-localstorage.hook';
+
 
 function App() {
-	const [searchQuery, setSearchQuery] = useState('');
-	const clicked = () => {
+	const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
+	const [currentProfile, setCurrentProfile] = useLocalStorage('currentProfile', null);
+	const [profiles, setProfiles] = useLocalStorage('profiles', []);
+
+	const search = ({ searchQuery }) => {
 		console.log(`Значение поиска ${searchQuery}`);
+	};
+	const login = ({ profileName }) => {
+		if (!profileName) {
+			return;
+		}
+		if (!profiles?.length) {
+			setCurrentProfile(null);
+		}
+		const findedProfile = profiles.find((p) => p.profileName === profileName);
+		const currentProfileInfo = {
+			profileName: findedProfile?.profileName || profileName,
+			isLoginned: true
+		};
+		setProfiles([
+			...profiles.map(p => ({ ...p, isLoginned: p.profileName === profileName })),
+			...(!findedProfile ? [currentProfileInfo] : [])
+		]);
+		setCurrentProfile(currentProfileInfo);
+		setIsLoginFormVisible(false);
+	};
+	const logout = () => {
+		setCurrentProfile(null);
+		setProfiles(profiles.map((p) => {
+			if (p.profileName === currentProfile.profileName) {
+				return {
+					...p,
+					isLoginned: false
+				};
+			}
+			return p;
+		})
+		);
+		setIsLoginFormVisible(false);
 	};
 	const [movies] = useState([
 		{
@@ -70,23 +106,17 @@ function App() {
 			posterUrl: '/posters/8.png'
 		}
 	]);
-
 	return (
 		<div className='layout'>
-			<Navigation />
-			<div className='search-section'>
-				<Title text="Поиск" />
-				<Paragraph size="small">Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.</Paragraph>
-				<div className='search-form'>
-					<Input
-						placeholder="Введите название"
-						icon="search"
-						value={searchQuery}
-						onChange={(e) => setSearchQuery(e.target.value)}
-					/>
-					<Button text="Искать" onClick={clicked} />
-				</div>
-			</div>
+			<Navigation
+				profile={currentProfile}
+				onLogin={() => setIsLoginFormVisible(true)}
+				onLogout={logout}
+			/>
+			{isLoginFormVisible && (
+				<LoginForm onSubmit={login} />
+			)}
+			<SearchForm onSubmit={search} />
 			<MovieList items={movies} />
 		</div>
 	);

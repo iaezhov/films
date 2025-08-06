@@ -1,19 +1,19 @@
+import { forwardRef } from 'react';
 import IconSearch from '../Icons/IconSearch';
 import styles from './Input.module.css';
 
-function Input({ placeholder, value, name, onChange, icon }) {
+const Input = forwardRef(({ icon, name = 'value', ...props }, ref) => {
 	return (
 		<div className={styles['input-wrapper']}>
 			{ icon === 'search' && <IconSearch /> }
 			<input
-				name={name || 'value'}
+				{...props}
+				ref={ref}
+				name={name}
 				type="text"
-				value={value}
-				onChange={onChange}
 				className={styles['styled-input']}
-				placeholder={placeholder}
 			/>
 		</div>
 	);
-}
+});
 export default Input;
