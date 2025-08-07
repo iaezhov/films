@@ -1,17 +1,16 @@
 import './App.css';
-import Button from './components/Button/Button';
-import Paragraph from './components/Paragraph/Paragraph';
-import Title from './components/Title/Title';
-import Input from './components/Input/Input';
 import Navigation from './layouts/Navigation/Navigation';
 import { useState } from 'react';
 import MovieList from './components/MovieList/MovieList';
+import SearchForm from './components/SearchForm/SearchForm';
+import LoginForm from './components/LoginForm/LoginForm';
+import { UserContextProvider } from './context/User/UserContextProvider';
 
 function App() {
-	const [searchQuery, setSearchQuery] = useState('');
-	const clicked = () => {
+	const search = ({ searchQuery }) => {
 		console.log(`Значение поиска ${searchQuery}`);
 	};
+
 	const [movies] = useState([
 		{
 			id: crypto.randomUUID(),
@@ -70,25 +69,15 @@ function App() {
 			posterUrl: '/posters/8.png'
 		}
 	]);
-
 	return (
-		<div className='layout'>
-			<Navigation />
-			<div className='search-section'>
-				<Title text="Поиск" />
-				<Paragraph size="small">Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.</Paragraph>
-				<div className='search-form'>
-					<Input
-						placeholder="Введите название"
-						icon="search"
-						value={searchQuery}
-						onChange={(e) => setSearchQuery(e.target.value)}
-					/>
-					<Button text="Искать" onClick={clicked} />
-				</div>
+		<UserContextProvider>
+			<div className='layout'>
+				<Navigation />
+				<LoginForm  />
+				<SearchForm onSubmit={search} />
+				<MovieList items={movies} />
 			</div>
-			<MovieList items={movies} />
-		</div>
+		</UserContextProvider>
 	);
 }
 
