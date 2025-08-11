@@ -1,9 +1,10 @@
-import styles from './LoginForm.module.css';
-import Button from '../Button/Button';
-import Title from '../Title/Title';
-import Input from '../Input/Input';
+import styles from './Login.module.css';
+import Button from '../../components/Button/Button';
+import Title from '../../components/Title/Title';
+import Input from '../../components/Input/Input';
 import { useContext, type FormEvent } from 'react';
 import { UserContext } from '../../context/User/user.context';
+import { useNavigate } from 'react-router-dom';
 
 type LoginFormData = {
 	profileName: {
@@ -11,18 +12,16 @@ type LoginFormData = {
 	};
 }
 
-function LoginForm() {
-	const { user, login } = useContext(UserContext);
-
-	if (user?.isLoginned) {
-		return null;
-	}
+function Login() {
+	const navigate = useNavigate();
+	const { login } = useContext(UserContext);
 
 	const submit = (event: FormEvent) => {
 		event.preventDefault();
 		const target = event.target as typeof event.target & LoginFormData;
 		const { profileName } = target;
 		login({ profileName: profileName.value });
+		navigate('/');
 	};
 
 	return (
@@ -38,4 +37,4 @@ function LoginForm() {
 		</div>
 	);
 }
-export default LoginForm;
+export default Login;

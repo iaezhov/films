@@ -3,18 +3,17 @@ import IconLogin from '../../components/icons/IconLogin';
 import IconBookmark from '../../components/icons/IconBookmark';
 import IconProfile from '../../components/icons/IconProfile';
 import cn from 'classnames';
-import { useContext, type MouseEvent } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../../context/User/user.context';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Navigation() {
 	const { user, logout } = useContext(UserContext);
+	const navigate = useNavigate();
 
-	const handleLinkClick = (
-		e: MouseEvent<HTMLAnchorElement>,
-		callback?: () => void
-	) => {
-		e.preventDefault();
-		callback?.();
+	const logoutHandler = () => {
+		logout();
+		navigate('/login');
 	};
 
 	return (
@@ -22,42 +21,46 @@ function Navigation() {
 			<IconBookmark className={styles.logo} />
 			<nav className={styles['navigation-list']}>
 				<ul>
-					<li
-						className={cn(
-							styles['navigation-list-item'],
-							styles['navigation-list-item__active']
-						)}
-					>
-						<a href="#" onClick={handleLinkClick}>
+					<li>
+						<NavLink to='/' className={({ isActive }) => cn(
+							styles['link'],
+							{ [styles['active']]: isActive })}>
 							<span>Поиск фильмов</span>
-						</a>
+						</NavLink>
 					</li>
-					<li className={styles['navigation-list-item']}>
-						<a href="#" onClick={handleLinkClick}>
+					<li>
+						<NavLink to='/favorites' className={({ isActive }) => cn(
+							styles['link'],
+							{ [styles['active']]: isActive })}>
 							<span>Мои фильмы</span>
 							<div className={styles.counter}>2</div>
-						</a>
+						</NavLink>
 					</li>
 					{user?.isLoginned ? (
 						<>
-							<li className={styles['navigation-list-item']}>
-								<a href="#" onClick={handleLinkClick}>
+							<li>
+								<a
+									href='#'
+									className={cn(styles['link'], styles['disabled'])}
+								>
 									<span>{user.profileName}</span>
 									<IconProfile />
 								</a>
 							</li>
-							<li className={styles['navigation-list-item']}>
-								<a href="#" onClick={(e) => handleLinkClick(e, logout)}>
+							<li>
+								<span className={styles['link']} onClick={logoutHandler}>
 									<span>Выйти</span>
-								</a>
+								</span>
 							</li>
 						</>
 					) : (
-						<li className={styles['navigation-list-item']}>
-							<a href="#" onClick={handleLinkClick}>
+						<li>
+							<NavLink to='/login' className={({ isActive }) => cn(
+								styles['link'],
+								{ [styles['active']]: isActive })}>
 								<span>Войти</span>
 								<IconLogin />
-							</a>
+							</NavLink>
 						</li>
 					)}
 				</ul>

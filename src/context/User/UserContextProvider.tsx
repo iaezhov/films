@@ -1,5 +1,5 @@
 import { UserContext } from './user.context';
-import { useLocalStorage } from '../../components/hooks/use-localstorage.hook';
+import { useLocalStorage } from '../../hooks/use-localstorage.hook';
 import type { UserContextProviderProps } from './UserContextProvider.props';
 import type { IUser } from '../../entities/user/user';
 import type { ReactElement } from 'react';

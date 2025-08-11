@@ -8,9 +8,9 @@ function MovieList({ items }: MovieListProps) {
 			{items && items.length > 0 && items.map(movie => (
 				<MovieCard
 					key={movie.id}
+					id={movie.id}
 					rating={movie.rating}
 					name={movie.name}
-					marked={movie.marked}
 					posterUrl={movie.posterUrl}
 				/>
 			))}

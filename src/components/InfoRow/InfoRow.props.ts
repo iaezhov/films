@@ -1,0 +1,1 @@
+export type InfoRowProps = { text: string; title: string };

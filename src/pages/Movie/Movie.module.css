@@ -1,0 +1,46 @@
+.movie-page {
+    padding: 50px 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+.title-wrapper {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    margin-bottom: 80px;
+}
+.subtitle {
+    color: #BEB7FB;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+}
+.title {
+    color: #EBEEF5;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 40px;
+    margin: 0;
+}
+.product-wrapper {
+    display: flex;
+    gap: 80px;
+    margin-bottom: 40px;
+}
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.product-poster {
+    border-radius: 24px;
+    width: 480px;
+    height: 720px;
+}
+.product-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}

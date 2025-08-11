@@ -5,6 +5,7 @@
     backdrop-filter: blur(80px);
     transition: border .4s;
     border: 2px solid transparent;
+    text-decoration: none;
 }
 .movie-card:hover {
     border-color: rgba(123, 110, 246, 1);

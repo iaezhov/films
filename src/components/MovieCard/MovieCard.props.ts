@@ -1,6 +1,3 @@
-export interface MovieCardProps {
-    rating: number;
-    name: string;
-    marked: boolean;
-    posterUrl: string;
-}
+import type { IMovie } from '../../entities/movie/movie';
+
+export type MovieCardProps = Pick<IMovie, 'id' | 'name' | 'posterUrl' | 'rating'>;
