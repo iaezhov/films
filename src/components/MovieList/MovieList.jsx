@@ -1,9 +1,9 @@
-import './MovieList.css';
+import styles from './MovieList.module.css';
 import MovieCard from '../MovieCard/MovieCard';
 
 function MovieList({ items }) {
 	return (
-		<div className="movie-list">
+		<div className={styles['movie-list']}>
 			{items && items.length > 0 && items.map(movie => (
 				<MovieCard
 					key={movie.id}

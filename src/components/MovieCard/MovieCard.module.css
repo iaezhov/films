@@ -18,8 +18,9 @@
 .poster-wrapper {
     position: relative;
     display: flex;
+    min-height: 262px;
 }
-.poster-wrapper > .rating {
+.poster-wrapper > .poster-info {
     position: absolute;
     top: 8px;
     left: 8px;

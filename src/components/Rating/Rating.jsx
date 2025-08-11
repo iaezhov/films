@@ -1,9 +1,9 @@
-import './Rating.css';
+import styles from './Rating.module.css';
 import IconStar from '../Icons/IconStar';
 
 function Rating({ count }) {
 	return (
-		<div className="rating">
+		<div className={styles.rating}>
 			<IconStar />
 			<span>{count}</span>
 		</div>

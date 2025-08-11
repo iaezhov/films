@@ -1,12 +1,17 @@
-import './MovieCardButton.css';
+import styles from './MovieCardButton.module.css';
 import IconLike from '../Icons/IconLike';
 import IconBookmark from '../Icons/IconBookmark';
+import cn from 'classnames';
 
 function MovieCardButton({ marked, onClick }) {
-	const cln = 'button-like' + (marked ? ' button-like--marked' : '');
 
 	return (
-		<button className={cln} onClick={onClick}>
+		<button
+			className={cn(styles['button-like'], {
+				[styles['button-like--marked']]: marked
+			})}
+			onClick={onClick}
+		>
 			{ marked ? <IconBookmark/> : <IconLike/> }
 			<span>{ marked ? 'В избраном' : 'В избранное' }</span>
 		</button>

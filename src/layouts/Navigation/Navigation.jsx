@@ -1,30 +1,60 @@
-import './Navigation.css';
+import styles from './Navigation.module.css';
 import IconLogin from '../../components/Icons/IconLogin';
 import IconBookmark from '../../components/Icons/IconBookmark';
+import IconProfile from '../../components/Icons/IconProfile';
+import cn from 'classnames';
+import { useContext } from 'react';
+import { UserContext } from '../../context/User/user.context';
 
 function Navigation() {
+	const { user, logout } = useContext(UserContext);
+
+	const onLinkClick = (e, callBack) => {
+		e.preventDefault();
+		if (callBack) {
+			callBack();
+		}
+	};
+	
 	return (
-		<header className='navigation'>
-			<IconBookmark className='logo' />
-			<nav className='navigation-list'>
+		<header className={styles['navigation']}>
+			<IconBookmark className={styles['logo']} />
+			<nav className={styles['navigation-list']}>
 				<ul>
-					<li className='navigation-list-item navigation-list-item__active'>
-						<a href="#">
+					<li className={cn(styles['navigation-list-item'], styles['navigation-list-item__active'])}>
+						<a href="#" onClick={onLinkClick}>
 							<span>Поиск фильмов</span>
 						</a>
 					</li>
-					<li className='navigation-list-item'>
-						<a href="#">
+					<li className={styles['navigation-list-item']}>
+						<a href="#" onClick={onLinkClick}>
 							<span>Мои фильмы</span>
-							<div className='counter'>2</div>
+							<div className={styles['counter']}>2</div>
 						</a>
 					</li>
-					<li className='navigation-list-item'>
-						<a href="#">
-							<span>Войти</span>
-							<IconLogin />
-						</a>
-					</li>
+					{user?.isLoginned
+						? (
+							<>
+								<li className={styles['navigation-list-item']}>
+									<a href="#" onClick={onLinkClick}>
+										<span>{user.profileName}</span>
+										<IconProfile />
+									</a>
+								</li>
+								<li className={styles['navigation-list-item']}>
+									<a href="#" onClick={(e) => onLinkClick(e, logout)}>
+										<span>Выйти</span>
+									</a>
+								</li>
+							</>
+						) : (
+							<li className={styles['navigation-list-item']}>
+								<a href="#" onClick={onLinkClick}>
+									<span>Войти</span>
+									<IconLogin />
+								</a>
+							</li>
+						)}
 				</ul>
 			</nav>
 		</header>
