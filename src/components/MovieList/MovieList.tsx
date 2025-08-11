@@ -1,7 +1,8 @@
 import styles from './MovieList.module.css';
 import MovieCard from '../MovieCard/MovieCard';
+import type { MovieListProps } from './MovieList.props';
 
-function MovieList({ items }) {
+function MovieList({ items }: MovieListProps) {
 	return (
 		<div className={styles['movie-list']}>
 			{items && items.length > 0 && items.map(movie => (

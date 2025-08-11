@@ -3,14 +3,21 @@ import Button from '../Button/Button';
 import Paragraph from '../Paragraph/Paragraph';
 import Title from '../Title/Title';
 import Input from '../Input/Input';
+import type { SearchFormProps } from './SearchForm.props';
+import type { FormEvent } from 'react';
 
-function SearchForm({ onSubmit }) {
-	const submit = (event) => {
+type SearchFormData = {
+	searchQuery: {
+		value: string;
+	};
+}
+
+function SearchForm({ onSubmit }: SearchFormProps) {
+	const submit = (event: FormEvent) => {
 		event.preventDefault();
-		const formData = new FormData(event.target);
-		const data = Object.fromEntries(formData.entries());
-		onSubmit(data);
-		event.target.reset();
+		const target = event.target as typeof event.target & SearchFormData;
+		const { searchQuery } = target;
+		onSubmit?.({ searchQuery: searchQuery?.value || '' });
 	};
 
 	return (
@@ -23,7 +30,7 @@ function SearchForm({ onSubmit }) {
 					placeholder="Введите название"
 					icon="search"
 				/>
-				<Button text="Искать" />
+				<Button>Искать</Button>
 			</form>
 		</div>
 	);

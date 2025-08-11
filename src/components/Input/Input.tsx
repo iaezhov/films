@@ -1,8 +1,9 @@
 import { forwardRef } from 'react';
-import IconSearch from '../Icons/IconSearch';
+import IconSearch from '../icons/IconSearch';
 import styles from './Input.module.css';
+import type { InputProps } from './Input.props';
 
-const Input = forwardRef(({ icon, name = 'value', ...props }, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(({ icon, name = 'value', ...props }, ref) => {
 	return (
 		<div className={styles['input-wrapper']}>
 			{ icon === 'search' && <IconSearch /> }

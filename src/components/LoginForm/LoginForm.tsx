@@ -2,8 +2,14 @@ import styles from './LoginForm.module.css';
 import Button from '../Button/Button';
 import Title from '../Title/Title';
 import Input from '../Input/Input';
-import { useContext } from 'react';
+import { useContext, type FormEvent } from 'react';
 import { UserContext } from '../../context/User/user.context';
+
+type LoginFormData = {
+	profileName: {
+		value: string;
+	};
+}
 
 function LoginForm() {
 	const { user, login } = useContext(UserContext);
@@ -12,11 +18,11 @@ function LoginForm() {
 		return null;
 	}
 
-	const submit = (event) => {
+	const submit = (event: FormEvent) => {
 		event.preventDefault();
-		const formData = new FormData(event.target);
-		const data = Object.fromEntries(formData.entries());
-		login(data);
+		const target = event.target as typeof event.target & LoginFormData;
+		const { profileName } = target;
+		login({ profileName: profileName.value });
 	};
 
 	return (
@@ -27,7 +33,7 @@ function LoginForm() {
 					name='profileName'
 					placeholder="Ваше имя"
 				/>
-				<Button text="Войти в профиль" />
+				<Button>Войти в профиль</Button>
 			</form>
 		</div>
 	);

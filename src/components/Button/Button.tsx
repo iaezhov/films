@@ -1,13 +1,14 @@
 import { forwardRef } from 'react';
 import styles from  './Button.module.css';
+import type { ButtonProps } from './Button.props';
 
-const Button = forwardRef(({ text, ...props }, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, ...props }, ref) => {
 	return (
 		<button
 			{...props}
 			ref={ref}
 			className={styles['button']}
-		>{text}</button>
+		>{children}</button>
 	);
 });
 export default Button;

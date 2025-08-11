@@ -1,8 +1,9 @@
 import styles from './MovieCard.module.css';
 import MovieCardButton from '../MovieCardButton/MovieCardButton';
 import Rating from '../Rating/Rating';
+import type { MovieCardProps } from './MovieCard.props';
 
-function MovieCard({ rating, name, marked, posterUrl }) {
+function MovieCard({ rating, name, marked, posterUrl }: MovieCardProps) {
 	return (
 		<div className={styles['movie-card']}>
 			<div className={styles['poster-wrapper']}>
