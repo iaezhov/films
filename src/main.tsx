@@ -1,13 +1,14 @@
-import { StrictMode } from 'react';
+import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './layouts/Layout/Layout';
 import { UserContextProvider } from './context/User/UserContextProvider';
-import Main from './pages/Main/Main';
 import Login from './pages/Login/Login';
-import Movie from './pages/Movie/Movie';
 import Favorites from './pages/Favorites/Favorites';
+import { getMovie } from './entities/movie';
+
+const Main = lazy(() => import('./pages/Main/Main'));
 
 const router = createBrowserRouter([
 	{
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <Main />
+				element: <Suspense><Main /></Suspense>
 			},
 			{
 				path: '/login',
@@ -28,7 +29,12 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/movie/:id',
-				element: <Movie />
+				loader: async ({ params }) => {
+					const movie = await getMovie(params.id as string);
+					return { movie };
+				},
+				Component: lazy(() => import('./pages/Movie/Movie')),
+				HydrateFallback: () => <div>Загрузка данных фильма</div>
 			}
 		]
 	}

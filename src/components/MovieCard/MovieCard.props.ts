@@ -1,3 +1,3 @@
-import type { IMovie } from '../../entities/movie/movie';
+import type { MovieListItem } from '../../entities/movie';
 
-export type MovieCardProps = Pick<IMovie, 'id' | 'name' | 'posterUrl' | 'rating'>;
+export type MovieCardProps = { movie: MovieListItem };

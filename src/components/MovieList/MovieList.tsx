@@ -6,13 +6,7 @@ function MovieList({ items }: MovieListProps) {
 	return (
 		<div className={styles['movie-list']}>
 			{items && items.length > 0 && items.map(movie => (
-				<MovieCard
-					key={movie.id}
-					id={movie.id}
-					rating={movie.rating}
-					name={movie.name}
-					posterUrl={movie.posterUrl}
-				/>
+				<MovieCard movie={movie} key={movie.id} />
 			))}
 		</div>
 	);

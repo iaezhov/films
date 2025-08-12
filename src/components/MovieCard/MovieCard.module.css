@@ -19,7 +19,10 @@
 .poster-wrapper {
     position: relative;
     display: flex;
-    min-height: 262px;
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .poster-wrapper > .poster-info {
     position: absolute;
@@ -33,7 +36,4 @@
     color: rgba(235, 238, 245, 1);
     margin: 0;
     padding: 0 8px;
-}
-.poster {
-    width: 100%;
 }

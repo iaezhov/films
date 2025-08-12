@@ -1,5 +1,5 @@
-import type { IMovie } from '../../entities/movie/movie';
+import type { MovieListItem } from '../../entities/movie';
 
 export interface MovieListProps {
-    items: IMovie[];
+    items: MovieListItem[];
 }
