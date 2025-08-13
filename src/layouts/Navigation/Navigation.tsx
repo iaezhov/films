@@ -13,7 +13,7 @@ function Navigation() {
 
 	const logoutHandler = () => {
 		logout();
-		navigate('/login');
+		navigate('/auth/login');
 	};
 
 	return (
@@ -55,7 +55,7 @@ function Navigation() {
 						</>
 					) : (
 						<li>
-							<NavLink to='/login' className={({ isActive }) => cn(
+							<NavLink to='/auth/login' className={({ isActive }) => cn(
 								styles['link'],
 								{ [styles['active']]: isActive })}>
 								<span>Войти</span>

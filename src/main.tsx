@@ -7,21 +7,28 @@ import { UserContextProvider } from './context/User/UserContextProvider';
 import Login from './pages/Login/Login';
 import Favorites from './pages/Favorites/Favorites';
 import { getMovie } from './entities/movie';
+import RequireAuth from './helpers/RequireAuth';
 
 const Main = lazy(() => import('./pages/Main/Main'));
 
 const router = createBrowserRouter([
 	{
-		path: '/',
+		path: '/auth',
 		element: <Layout />,
+		children: [
+			{
+				path: 'login',
+				element: <Login />
+			}
+		]
+	},
+	{
+		path: '/',
+		element: <RequireAuth><Layout /></RequireAuth>,
 		children: [
 			{
 				path: '/',
 				element: <Suspense><Main /></Suspense>
-			},
-			{
-				path: '/login',
-				element: <Login />
 			},
 			{
 				path: '/favorites',
