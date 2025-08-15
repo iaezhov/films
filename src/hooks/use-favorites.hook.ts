@@ -1,16 +1,16 @@
-import type { IMovie } from '../entities/movie/movie';
+import type { MovieListItem } from '../entities/movie';
 import { useLocalStorage } from './use-localstorage.hook';
 
 interface IUseFavorites {
-	favorites: IMovie[],
-	addToFavorites: (value: IMovie) => void,
-	removeFromFavorites: (value: IMovie['id']) => void,
-	setFavorites: (value: IMovie[]) => void,
-	isFavorite: (value: IMovie['id']) => boolean,
+	favorites: MovieListItem[],
+	addToFavorites: (value: MovieListItem) => void,
+	removeFromFavorites: (value: MovieListItem['id']) => void,
+	setFavorites: (value: MovieListItem[]) => void,
+	isFavorite: (value: MovieListItem['id']) => boolean,
 }
 
 export function useFavorites(): IUseFavorites {
-	const [favorites, setFavorites] = useLocalStorage<IMovie[]>('favorites', []);
+	const [favorites, setFavorites] = useLocalStorage<MovieListItem[]>('favorites', []);
 
 	const isFavorite: IUseFavorites['isFavorite']  = (id) => {
 		return favorites.some(el => el.id === id);

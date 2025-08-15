@@ -1,3 +1,3 @@
-import type { IMovie } from '../../entities/movie/movie';
+import type { MovieListItem } from '../../entities/movie';
 
-export type FavoriteButtonProps = { movie: IMovie };
+export type FavoriteButtonProps = { movie: MovieListItem };
