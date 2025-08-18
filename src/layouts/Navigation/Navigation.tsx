@@ -6,10 +6,14 @@ import cn from 'classnames';
 import { useContext } from 'react';
 import { UserContext } from '../../context/User/user.context';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useFavorites } from '../../hooks/use-favorites.hook';
 
 function Navigation() {
 	const { user, logout } = useContext(UserContext);
+	const { favorites } =  useFavorites();
 	const navigate = useNavigate();
+
+	const favoriteCounter = favorites.length;
 
 	const logoutHandler = () => {
 		logout();
@@ -33,7 +37,7 @@ function Navigation() {
 							styles['link'],
 							{ [styles['active']]: isActive })}>
 							<span>Мои фильмы</span>
-							<div className={styles.counter}>2</div>
+							{!!favoriteCounter && <div className={styles.counter}>{favoriteCounter}</div>}
 						</NavLink>
 					</li>
 					{user?.isLoginned ? (

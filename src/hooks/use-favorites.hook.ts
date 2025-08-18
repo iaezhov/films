@@ -1,37 +1,48 @@
+import { useDispatch, useSelector } from 'react-redux';
 import type { MovieListItem } from '../entities/movie';
-import { useLocalStorage } from './use-localstorage.hook';
+import type { AppDispatch, RootState } from '../store/store';
+import { favoritesActions } from '../store/favorites.slice';
 
 interface IUseFavorites {
 	favorites: MovieListItem[],
 	addToFavorites: (value: MovieListItem) => void,
 	removeFromFavorites: (value: MovieListItem['id']) => void,
-	setFavorites: (value: MovieListItem[]) => void,
 	isFavorite: (value: MovieListItem['id']) => boolean,
+	toggleFavorite: (value: MovieListItem) => void,
 }
 
 export function useFavorites(): IUseFavorites {
-	const [favorites, setFavorites] = useLocalStorage<MovieListItem[]>('favorites', []);
+	const favorites = useSelector((s: RootState) => s.favorites.movies);
+	const dispatch = useDispatch<AppDispatch>();
 
 	const isFavorite: IUseFavorites['isFavorite']  = (id) => {
 		return favorites.some(el => el.id === id);
 	};
 
 	const addToFavorites: IUseFavorites['addToFavorites'] = (movie) => {
-		if (isFavorite(movie.id)) {
-			return;
-		}
-		setFavorites([...favorites, movie]);
+		dispatch(favoritesActions.add(movie));
 	};
 
 	const removeFromFavorites: IUseFavorites['removeFromFavorites'] = (id) => {
-		setFavorites([...favorites.filter(el => el.id !== id)]);
+		dispatch(favoritesActions.remove(id));
+	};
+
+	const toggleFavorite: IUseFavorites['toggleFavorite']  = (movie) => {
+		if (!movie) {
+			return;
+		}
+		if (isFavorite(movie.id)) {
+			removeFromFavorites(movie.id);
+		} else {
+			addToFavorites(movie);
+		}
 	};
 
 	return {
 		favorites,
 		addToFavorites,
 		removeFromFavorites,
-		setFavorites,
-		isFavorite
+		isFavorite,
+		toggleFavorite
 	};
 }
