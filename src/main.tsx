@@ -8,6 +8,8 @@ import Login from './pages/Login/Login';
 import Favorites from './pages/Favorites/Favorites';
 import { getMovie } from './entities/movie';
 import RequireAuth from './helpers/RequireAuth';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const Main = lazy(() => import('./pages/Main/Main'));
 
@@ -49,8 +51,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<UserContextProvider>
-			<RouterProvider router={router} />
-		</UserContextProvider>
+		<Provider store={store}>
+			<UserContextProvider>
+				<RouterProvider router={router} />
+			</UserContextProvider>
+		</Provider>	
 	</StrictMode>
 );
